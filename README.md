@@ -17,17 +17,19 @@ A data é o número de nanosegundos desde um ponto no início da execução do p
 
 O tipo do registro é um caractere:
 
-* **A** a porta foi aberta no andar especificado
-* **F** a porta foi fechada no andar especificado
-* **B** a thread bloqueou (o andar é ignorado)
-* **E** a thread acordou (o andar é ignorado)
-* **M** a thread morreu (o andar é ignorado)
-* **S** foi apertado botão para subir no andar especificado
-* **D** foi apertado botão para descer no andar especificado
-* **I** foi apertado o botão interno correspondente ao andar especificado
-* **sdi** foi apagado o botão (como em SDI acima)
-* **N** pessoa entrou no elevador no andar especificado
-* **V** a pessoa saiu do elevador no andar especificado
+| Letra   |                                                                    |
+| ------- | ------------------------------------------------------------------ |
+| **A**   | a porta foi aberta no andar especificado                           |
+| **F**   | a porta foi fechada no andar especificado                          |
+| **B**   | a thread bloqueou (o andar é ignorado)                             |
+| **E**   | a thread acordou (o andar é ignorado)                              |
+| **M**   | a thread morreu (o andar é ignorado)                               |
+| **S**   | foi apertado botão para subir no andar especificado                |
+| **D**   | foi apertado botão para descer no andar especificado               |
+| **I**   | foi apertado o botão interno correspondente ao andar especificado  |
+| **sdi** | foi apagado o botão (como em SDI acima)                            |
+| **N**   | pessoa entrou no elevador no andar especificado                    |
+| **V**   | a pessoa saiu do elevador no andar especificado                    |
 
 No início da execução de cada thread deve ter um evento E; no final, um M.
 
