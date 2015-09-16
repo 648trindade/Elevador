@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthreads.h>
+#include <pthread.h>
 
 /*	=== Pessoa ===
 	(Objeto privado) Estrutura representando uma pessoa.
@@ -34,7 +34,7 @@ typedef struct{
 typedef struct{
 	int nmax;			// Número máximo de pessoas;
 	int n;				// Número de pessoas dentro do elevador;
-	int pos;			// Andar que ele se encontra;
+	int andar;			// Andar que ele se encontra;
 	int *dest;			// Vetor contendo as direções (possivelmente tenha que ser global)
 	int status;			// Estado do elevador;
 }elevador;
@@ -67,7 +67,27 @@ void quick(int *v, int low, int high, int ordem){
 		quick(v,low,j,ordem);
 }
 
-
 int main(){
+	//Lendo
+	int n;
+	scanf("%d",&n);
+	pessoa p[n];
+	// Descreve elevador
+	elevador e;
+	e.nmax = 3;
+	e.n = 0;
+	e.andar = 1;
+	e.dest = NULL;
+	e.status = 0;	// Parado
+	//Lê pessoas
+	for (i=0;i<n;i++){
+		scanf("%d",&p[i].ndest);
+		p[i].andar = 1;
+		p[i].status = 0;
+		p[i].time = malloc(p[i].ndest*sizeof(int));
+		p[i].dest = malloc(p[i].ndest*sizeof(int));
+		for(j=0;j<=p[i].ndest;j++)
+			scanf("%d %d",&p[i].dest[j],&p[i].time[j])
+	}
 	return 0;
 }
