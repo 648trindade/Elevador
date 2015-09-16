@@ -87,7 +87,7 @@ int main(){
 		p[i].time = malloc(p[i].ndest*sizeof(int));
 		p[i].dest = malloc(p[i].ndest*sizeof(int));
 		for(j=0;j<=p[i].ndest;j++)
-			scanf("%d %d",&p[i].dest[j],&p[i].time[j])
+			scanf("%d %d",&p[i].dest[j],&p[i].time[j]);
 	}
 	return 0;
 }
