@@ -19,7 +19,9 @@ A entrada acima indica que 4 pessoas usarão o elevador
 A seguir as proximas 4 linhas explicam as visitas de cada pessoa
 
 A primeira pessoa realizará 3 visitas, sendo:
+
 1.	Andar 1, tempo de 20 ns;
 2.	Andar 5, tempo de 70 ns;
 3.	Andar 8, tempo de 20 ns;
+
 E assim consecutivamente;
