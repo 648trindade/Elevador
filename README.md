@@ -13,9 +13,8 @@ São simuladas N pessoas (identificadas por números entre 1 e N). Inicialmente,
 
 Cada thread (elevador e pessoas) deve registrar suas ações em um buffer. Para evitar a contenção na disputa pelo acesso a um buffer compartilhado, deve existir um para cada thread. Esses buffers devem ser gravados em um arquivo no final da execução do programa (quando todas as threads das pessoas tiverem terminado sua execução). Cada registro contém a data em que ocorreu, o tipo do registro e o andar.
 
-A data é o número de nanosegundos desde um ponto no início da execução do programa.
-
-O tipo do registro é um caractere:
+* A data é o número de nanosegundos desde um ponto no início da execução do programa.
+* O tipo do registro é um caractere:
 
 | Letra   | Descrição                                                          |
 | ------- | ------------------------------------------------------------------ |
@@ -31,8 +30,7 @@ O tipo do registro é um caractere:
 | **N**   | pessoa entrou no elevador no andar especificado                    |
 | **V**   | a pessoa saiu do elevador no andar especificado                    |
 
-No início da execução de cada thread deve ter um evento E; no final, um M.
-
-O andar é um número entre 0 e 4
+* No início da execução de cada thread deve ter um evento E; no final, um M.
+* O andar é um número entre 0 e 4
 
 Os registros são gravados um por linha no arquivo de saída. Cada linha inicia com a identificação da thread que registrou o evento (0 para o elevador, 1 a N para as pessoas), seguido da data, do tipo e do andar, separados por espaço.
