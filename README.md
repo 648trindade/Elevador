@@ -30,7 +30,7 @@ Cada thread (elevador e pessoas) deve registrar suas ações em um buffer. Para 
 | **N**   | pessoa entrou no elevador no andar especificado                    |
 | **V**   | a pessoa saiu do elevador no andar especificado                    |
 
-* No início da execução de cada thread deve ter um evento E; no final, um M.
+* No início da execução de cada thread deve ter um evento **E**; no final, um **M**.
 * O andar é um número entre 0 e 4
 
 Os registros são gravados um por linha no arquivo de saída. Cada linha inicia com a identificação da thread que registrou o evento (0 para o elevador, 1 a N para as pessoas), seguido da data, do tipo e do andar, separados por espaço.
