@@ -17,7 +17,7 @@ A data é o número de nanosegundos desde um ponto no início da execução do p
 
 O tipo do registro é um caractere:
 
-| Letra   |                                                                    |
+| Letra   | Descrição                                                          |
 | ------- | ------------------------------------------------------------------ |
 | **A**   | a porta foi aberta no andar especificado                           |
 | **F**   | a porta foi fechada no andar especificado                          |
