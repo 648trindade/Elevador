@@ -7,13 +7,14 @@
 	Contém uma variável (status) indicando o estado da pessoa: 
 	*	0:	Visitando o andar;
 	*	1:	Dentro do elevador;
-	*	-1:	Esperando o elevador;
+	*  -1:	Esperando o elevador;
 */
 typedef struct{
 	int andar;			// Andar que ele se encontra;
 	int status;			// Estado atual da pessoa;
 	int *dest;			// Vetor de destinos da pessoa;
 	int *time;			// Vetor de tempo de visita em cada andar destino;
+	int ndest;			// Quantia de visitas a realizar (também tamanho do vetor)
 }pessoa;
 
 /*	=== Elevador ===
@@ -28,7 +29,7 @@ typedef struct{
 	O elevador também tem uma flag (status) indicando sua movimentação
 	*	0:	parado
 	*	1:	subindo
-	*	-1:	descendo
+	*  -1:	descendo
 */
 typedef struct{
 	int nmax;			// Número máximo de pessoas;
@@ -37,6 +38,35 @@ typedef struct{
 	int *dest;			// Vetor contendo as direções (possivelmente tenha que ser global)
 	int status;			// Estado do elevador;
 }elevador;
+
+/*	=== Quick Sort ===
+	Parametros:
+	*v		:	Vetor a ser ordenado
+	low		:	Indice mais baixo
+	high	:	Indice mais alto
+	ordem	:	Ordem (1 Crescente, 0 Decrescente)
+*/
+void quick(int *v, int low, int high, int ordem){
+	int i = low, j = high, swap;
+	int mid = v[(i+j)/2];
+	while (i<=j){
+		while (((ordem)? v[i]<x : v[i]>x ) && i<high)
+			i++;
+		while (((ordem)? v[j]>x : v[j]<x ) && j>low)
+			j--;
+		if ((ordem)? v[i]>=v[j] : v[i]<=v[j]){
+			swap = v[i];
+			v[i] = v[j];
+			v[j] = swap;
+			i++; j--;
+		}
+	}
+	if(i<high)
+		quick(v,i,high,ordem);
+	if(j>low)
+		quick(v,low,j,ordem);
+}
+
 
 int main(){
 	return 0;
