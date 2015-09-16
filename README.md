@@ -2,6 +2,7 @@
 Trabalho de Sistemas Operacionais "A" - UFSM 2015
 
 **Data de entrega:** ASD
+
 **Método de entrega:** coloque os arquivos fonte, entradas e saídas em um diretório chamado t1-fulano-sicrano, comprima o diretório (de preferência .tgz), anexe o resultado a um mail e envie para benhur+so@inf.ufsm.br. O nome do arquivo deve ser t1-fulano-sicrano.c e o assunto do mail deve ser t1-fulano-sicrano, com fulano-sicrano substituído pelo login do(s) aluno(s). O trabalho pode ser feito em grupos de até dois alunos.
 
 Implemente um programa na linguagem C que simula um elevador. O programa deve usar threads (biblioteca pthreads), no mínimo uma para simular o comportamento do elevador e uma para simular o comportamento de cada pessoa. A sincronização das threads deve sem implementada com algo próximo de monitores (com mutex e variáveis de condição). O programa deve ler um arquivo no formato descrito a seguir, que contém o comportamento de cada pessoa. O programa deve produzir sua saída conforme descrito a seguir.
