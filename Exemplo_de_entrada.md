@@ -16,7 +16,7 @@ valores **M1** e **M2**, representando o andar desejado (**M1**) e o tempo (**M2
 #### Explicação:
 A entrada acima indica que 4 pessoas usarão o elevador
 
-A seguir as proximas 4 linhas explicam as visitas de cada pessoa
+A seguir as próximas 4 linhas explicam as visitas de cada pessoa
 
 A primeira pessoa realizará 3 visitas, sendo:
 
