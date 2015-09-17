@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-//teste
+//testeg
 
 /*	=== Pessoa ===
 	(Objeto privado) Estrutura representando uma pessoa.
