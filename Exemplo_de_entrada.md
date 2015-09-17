@@ -4,7 +4,8 @@ Uma entrada consiste de um inteiro **N**, representando o número de pessoas a
 usar o elevador.
 
 As **N** linhas seguintes contém um inteiro **M** seguido de **M** pares de
-valores **M1** e **M2**, representando o andar desejado (**M1**) e o tempo (**M2**) a permanecer no andar.
+valores **M1** e **M2**, representando o andar desejado (**M1**) e o tempo
+(**M2**) a permanecer no andar.
 
 #### Exemplo:
 > 4<br>
