@@ -11,11 +11,11 @@
 	*  -1:	Esperando o elevador;
 */
 typedef struct{
+	int id;				// Número da pessoa;
 	int andar;			// Andar que ele se encontra;
 	int status;			// Estado atual da pessoa;
-	int *dest;			// Vetor de destinos da pessoa;
-	int *time;			// Vetor de tempo de visita em cada andar destino;
-	int ndest;			// Quantia de visitas a realizar (também tamanho do vetor)
+	lista_t dest;		// Vetor de destinos da pessoa;
+	lista_t time;		// Vetor de tempo de visita em cada andar destino;
 }pessoa;
 
 /*	=== Elevador ===
@@ -26,17 +26,18 @@ typedef struct{
 	*	descendo:	ordenado em ordem decrescente (andares mais altos primeiro)
 	O elevador também deve parar nos andares em que alguém pressionou um botão
 	para seguir na mesmo direção que o elevador, mas somente se não estiver
-	lotado (n < nmax).
+	lotado (qtd_p <= 3).
 	O elevador também tem uma flag (status) indicando sua movimentação
 	*	0:	parado
 	*	1:	subindo
-	*  -1:	descendo
+	*   2:	descendo
 */
 typedef struct{
-	int nmax;			// Número máximo de pessoas;
-	int n;				// Número de pessoas dentro do elevador;
+	int qtd_p;			// Número de pessoas dentro do elevador;
 	int andar;			// Andar que ele se encontra;
-	int *dest;			// Vetor contendo as direções (possivelmente tenha que ser global)
+	lista_t dest		// Lista contendo as direções (possivelmente tenha que ser global)
+	lista_t pedidos[2];	// Listas contendo pedidos (0 subir, 1 descer)
+	int pessoas[3];		// vetor com número das pessoas dentro
 	int status;			// Estado do elevador;
 }elevador;
 
@@ -48,7 +49,7 @@ void *func(void *arg){
 }
 
 int main(){
-	/*//Lendo
+	//Lendo
 	int n,j;
 	unsigned long i;
 	scanf("%d",&n);
@@ -81,15 +82,6 @@ int main(){
 		free(p[i].time);
 		free(p[i].dest);
 	}
-	printf("coco\n");*/
-	lista_t l;
-	l_cria(&l);
-	l_insere_ord(&l,5);
-	l_insere_ord(&l,3);
-	l_insere_ord(&l,4);
-	int i;
-	for (i=0;i<3;i++)
-		printf("%d ",l_retira(&l));
-	l_destroi(&l);
+	printf("coco\n");
 	return 0;
 }
