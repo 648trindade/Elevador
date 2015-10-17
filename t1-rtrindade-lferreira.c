@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-
-//teste
+#include "lista.h"
 
 /*	=== Pessoa ===
 	(Objeto privado) Estrutura representando uma pessoa.
@@ -52,9 +51,9 @@ void quick(int *v, int low, int high, int ordem){
 	int i = low, j = high, swap;
 	int mid = v[(i+j)/2];
 	while (i<=j){
-		while (((ordem)? v[i]<x : v[i]>x ) && i<high)
+		while (((ordem)? v[i]<mid : v[i]>mid ) && i<high)
 			i++;
-		while (((ordem)? v[j]>x : v[j]<x ) && j>low)
+		while (((ordem)? v[j]>mid : v[j]<mid ) && j>low)
 			j--;
 		if ((ordem)? v[i]>=v[j] : v[i]<=v[j]){
 			swap = v[i];
@@ -69,9 +68,18 @@ void quick(int *v, int low, int high, int ordem){
 		quick(v,low,j,ordem);
 }
 
+
+
+void *func(void *arg){
+	pessoa *pes = (pessoa*)arg;
+	printf("cocozao\n");
+	pthread_exit(NULL);
+}
+
 int main(){
 	//Lendo
-	int n;
+	int n,j;
+	unsigned long i;
 	scanf("%d",&n);
 	pessoa p[n];
 	// Descreve elevador
@@ -82,14 +90,26 @@ int main(){
 	e.dest = NULL;
 	e.status = 0;	// Parado
 	//Lê pessoas
+	pthread_t threads[n];
 	for (i=0;i<n;i++){
 		scanf("%d",&p[i].ndest);
 		p[i].andar = 1;
 		p[i].status = 0;
 		p[i].time = malloc(p[i].ndest*sizeof(int));
 		p[i].dest = malloc(p[i].ndest*sizeof(int));
-		for(j=0;j<=p[i].ndest;j++)
+		for(j=0;j<p[i].ndest;j++)
 			scanf("%d %d",&p[i].dest[j],&p[i].time[j]);
+		pthread_create(&threads[i],NULL,func,(void*)&p[i]);
 	}
+	for (i=0;i<n;i++){
+		pthread_join(threads[i],NULL);
+	}
+	//pthread_exit(NULL);
+	//libera alocacoes
+	for (i=0;i<n;i++){
+		free(p[i].time);
+		free(p[i].dest);
+	}
+	printf("coco\n");
 	return 0;
 }
