@@ -40,35 +40,6 @@ typedef struct{
 	int status;			// Estado do elevador;
 }elevador;
 
-/*	=== Quick Sort ===
-	Parametros:
-	*v		:	Vetor a ser ordenado
-	low		:	Indice mais baixo
-	high	:	Indice mais alto
-	ordem	:	Ordem (1 Crescente, 0 Decrescente)
-*/
-void quick(int *v, int low, int high, int ordem){
-	int i = low, j = high, swap;
-	int mid = v[(i+j)/2];
-	while (i<=j){
-		while (((ordem)? v[i]<mid : v[i]>mid ) && i<high)
-			i++;
-		while (((ordem)? v[j]>mid : v[j]<mid ) && j>low)
-			j--;
-		if ((ordem)? v[i]>=v[j] : v[i]<=v[j]){
-			swap = v[i];
-			v[i] = v[j];
-			v[j] = swap;
-			i++; j--;
-		}
-	}
-	if(i<high)
-		quick(v,i,high,ordem);
-	if(j>low)
-		quick(v,low,j,ordem);
-}
-
-
 
 void *func(void *arg){
 	pessoa *pes = (pessoa*)arg;
