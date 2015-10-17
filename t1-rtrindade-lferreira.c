@@ -77,7 +77,7 @@ void *func(void *arg){
 }
 
 int main(){
-	//Lendo
+	/*//Lendo
 	int n,j;
 	unsigned long i;
 	scanf("%d",&n);
@@ -110,6 +110,15 @@ int main(){
 		free(p[i].time);
 		free(p[i].dest);
 	}
-	printf("coco\n");
+	printf("coco\n");*/
+	lista_t l;
+	l_cria(&l);
+	l_insere_ord(&l,5);
+	l_insere_ord(&l,3);
+	l_insere_ord(&l,4);
+	int i;
+	for (i=0;i<3;i++)
+		printf("%d ",l_retira(&l));
+	l_destroi(&l);
 	return 0;
 }

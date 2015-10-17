@@ -1,6 +1,9 @@
+#ifndef _TELA_H_
+#define _TELA_H_
+
 typedef struct elem{
 	int valor;
-	sstruct elem *prox;
+	struct elem *prox;
 }elem_t;
 
 typedef struct{
@@ -16,4 +19,6 @@ void l_insere_ord(lista_t *l, int valor);
 
 int l_retira(lista_t *l);
 
-int l_destroi(lista_t *l);
+void l_destroi(lista_t *l);
+
+#endif
