@@ -116,6 +116,10 @@ void *acao_pessoa(void *arg){
 	pthread_exit(NULL);
 }
 
+void *acao_elevador(void* args){
+	
+}
+
 void cria_threads(pessoa p[], pthread_t p_thr[], int n){
 	int i, j, d, a, t;
 	for (i=0;i<n;i++){
