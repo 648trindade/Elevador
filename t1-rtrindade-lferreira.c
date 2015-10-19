@@ -4,6 +4,7 @@
 #include "lista.h"
 #include <time.h>
 
+
 pthread_mutex_t mutex_pedidos, mutex_print;
 
 clock_t ini;
