@@ -1,0 +1,63 @@
+<svg viewBox='0 0 88 40' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <g id='elevador'>
+    <rect id='caixa'
+        x='1' y='25' width='10' height='6' fill='white' stroke='black' />
+    <rect id='porta'
+        x='11' y='29' width='1' height='0' stroke='white' fill='white' />
+    <circle id='b0' cx='2' cy='30' r='.45' fill='gray' stroke='transparent' />
+    <circle id='b1' cx='2' cy='29' r='.45' fill='gray' stroke='transparent' />
+    <circle id='b2' cx='2' cy='28' r='.45' fill='gray' stroke='transparent' />
+    <circle id='b3' cx='2' cy='27' r='.45' fill='gray' stroke='transparent' />
+    <circle id='b4' cx='2' cy='26' r='.45' fill='gray' stroke='transparent' />
+  </g>
+  <circle id='b4s' cx='12' cy='3' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b4d' cx='12' cy='4' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b3s' cx='12' cy='9' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b3d' cx='12' cy='10' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b2s' cx='12' cy='15' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b2d' cx='12' cy='16' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b1s' cx='12' cy='21' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b1d' cx='12' cy='22' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b0s' cx='12' cy='27' r='.45' fill='gray' stroke='transparent' />
+  <circle id='b0d' cx='12' cy='28' r='.45' fill='gray' stroke='transparent' />
+<g id='t2'> <circle id='t2c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>2</text> </g>
+<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='0 0' to='39.0 29.5' dur='0.3s' begin='0.0s' fill='freeze'/>
+<animate xlink:href='#t2c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='0.3s' fill='freeze'/>
+<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='39.0 29.5' to='17.0 29.5' dur='1.0s' begin='0.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='1.6s' dur='1s'/>
+<set xlink:href='#t2c' attributeName='fill' to='yellow' begin='1.7s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='1.8s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='1.9s'/>
+<g id='t3'> <circle id='t3c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>3</text> </g>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='0 0' to='41.0 29.5' dur='0.3s' begin='2.0s' fill='freeze'/>
+<animate xlink:href='#t3c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='2.3s' fill='freeze'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='41.0 29.5' to='19.0 29.5' dur='1.0s' begin='2.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='3.6s' dur='1s'/>
+<set xlink:href='#t3c' attributeName='fill' to='yellow' begin='3.7s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='3.8s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='3.9s'/>
+<g id='t4'> <circle id='t4c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>4</text> </g>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='0 0' to='43.0 29.5' dur='0.3s' begin='4.0s' fill='freeze'/>
+<animate xlink:href='#t4c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='4.3s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='43.0 29.5' to='21.0 29.5' dur='1.0s' begin='4.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='5.6s' dur='1s'/>
+<set xlink:href='#t4c' attributeName='fill' to='yellow' begin='5.7s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='5.8s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='5.9s'/>
+<g id='t1'> <circle id='t1c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>1</text> </g>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='0 0' to='37.0 29.5' dur='0.3s' begin='6.0s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='6.3s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='37.0 29.5' to='15.0 29.5' dur='1.0s' begin='6.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='7.6s' dur='1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='7.7s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='7.8s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='7.9s'/>
+<g id='t5'> <circle id='t5c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>5</text> </g>
+<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='0 0' to='45.0 29.5' dur='0.3s' begin='8.0s' fill='freeze'/>
+<animate xlink:href='#t5c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='8.3s' fill='freeze'/>
+<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='45.0 29.5' to='23.0 29.5' dur='1.0s' begin='8.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='9.6s' dur='1s'/>
+<set xlink:href='#t5c' attributeName='fill' to='yellow' begin='9.7s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='9.8s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='9.9s'/>
+</svg>

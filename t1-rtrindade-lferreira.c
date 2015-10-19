@@ -4,10 +4,20 @@
 #include "lista.h"
 #include <time.h>
 
-pthread_mutex_t mutex_pedidos;
+pthread_mutex_t mutex_pedidos, mutex_print;
 
 clock_t ini;
 int bi = 1e9;
+
+int tempo(){
+	return (int)(clock()-ini);
+}
+
+void print(int id, char c, int a){
+	pthread_mutex_lock(&mutex_print);
+	printf("%d %d %c %d\n",id+1, tempo(), c, a);
+	pthread_mutex_unlock(&mutex_print);
+}
 
 /*	=== Pessoa ===
 	(Objeto privado) Estrutura representando uma pessoa.
@@ -56,22 +66,20 @@ void chama_elevador(pessoa *p, int dest){
 	int sentido;
 	if (dest > p->andar){
 		sentido = 0; 	//pessoa vai subir
-		//printf("%d %d S %d\n",p->id,(int)((clock()-ini)*bi/CLOCKS_PER_SEC),p->andar);
-		printf("%d %d S %d\n",p->id,(int)(clock()-ini),p->andar);
+		print(p->id, 'S', p->andar);
 	}
 	else{
 		sentido = 1; 	//pessoa vai descer
-		//printf("%d %d D %d\n",p->id,(int)((clock()-ini)*bi/CLOCKS_PER_SEC),p->andar);
-		printf("%d %d D %d\n",p->id,(int)(clock()-ini),p->andar);
+		print(p->id, 'D', p->andar);
 	}
 	l_insere_ord(&(e.pedidos[sentido]), dest, sentido);
 	pthread_mutex_unlock(&mutex_pedidos);
-	p->status = 1;
+	p->status = 2;
 }
 
 void *acao_pessoa(void *arg){
 	pessoa *p = (pessoa *) arg;
-	printf("%d %d E 0\n",p->id,(int)(clock()-ini));
+	print(p->id, 'E', 0);
 	int p_dest, p_temp;
 	struct timespec wait, rest;
 	wait.tv_sec = 0;
@@ -86,19 +94,24 @@ void *acao_pessoa(void *arg){
 		pthread_mutex_unlock(&(p->m));
 		//entra elevador
 		//TODO
+		print(p->id, 'N', p->andar);
+		p->status = 1;
 		p->andar = p_dest;
-		p->status = 2;
+		print(p->id, 'I', p->andar);
 		//espera ser acordado pelo elevador (elevador chegar no destino)
 		pthread_mutex_lock(&(p->m));
 		pthread_cond_wait(&(p->c),&(p->m));
 		pthread_mutex_unlock(&(p->m));
 		//entra no andar e visita (espera)
+		print(p->id, 'V', p->andar);
 		p->status = 0;
 		wait.tv_nsec = (long) l_retira(&(p->time));
-		nanosleep(&wait, &rest);
-		//TODO
-		if (p->dest.qtd == 0)
-			break;
+		if (wait.tv_nsec != -1){
+			print(p->id, 'B', 0);
+			nanosleep(&wait, &rest);
+			print(p->id, 'E', 0);
+		}
+		else break;
 	}
 	pthread_exit(NULL);
 }
@@ -106,7 +119,6 @@ void *acao_pessoa(void *arg){
 void cria_threads(pessoa p[], pthread_t p_thr[], int n){
 	int i, j, d, a, t;
 	for (i=0;i<n;i++){
-		//cria condicional
 		scanf("%d",&d);
 		pthread_cond_init(&(p[i].c), 0);
 		pthread_mutex_init(&(p[i].m), 0);
@@ -123,7 +135,6 @@ void cria_threads(pessoa p[], pthread_t p_thr[], int n){
 		l_insere(&(p[i].dest), 0);
 		l_insere(&(p[i].time),-1);
 		pthread_create(&p_thr[i], NULL, acao_pessoa, (void*)&p[i]);
-		//printf("%d %d E 0\n",p[i].id,(int)((clock()-ini)*bi/CLOCKS_PER_SEC));
 	}
 }
 
@@ -133,6 +144,11 @@ int main(){
 	int n,j,i;
 	scanf("%d",&n);
 	pessoa p[n];
+	//Lê pessoas
+	pthread_t p_thr[n], e_thr;
+	ini = clock();
+	cria_threads(p, p_thr, n);
+	
 	// Descreve elevador
 	e.qtd_p = 0;
 	e.andar = 0;
@@ -140,10 +156,8 @@ int main(){
 	l_cria(&(e.pedidos[0]));
 	l_cria(&(e.pedidos[1]));
 	e.status = 0;	// Parado
-	//Lê pessoas
-	pthread_t p_thr[n], e_thr;
-	ini = clock();
-	cria_threads(p, p_thr, n);
+	
+	
 	
 	for (i=0;i < n; i++){
 		pthread_join(p_thr[i],0);
