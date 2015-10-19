@@ -118,7 +118,7 @@ void *acao_pessoa(void *arg){
 }
 
 void *acao_elevador(void* args){
-	
+	//TODO
 }
 
 void cria_threads(pessoa p[], pthread_t p_thr[], int n){
