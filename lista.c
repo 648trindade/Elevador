@@ -12,16 +12,18 @@ void l_insere(lista_t *l, int valor){
 	elem_t *novo = malloc(sizeof(elem_t));
 	novo->valor	= valor;
 	novo->prox = NULL;
-	if (l->qtd){
-		for (aux = l->inicio; aux->prox != NULL; aux = aux->prox){
-			if (aux->valor == valor){
-				free (novo);
-				return;
-			}
+	for (aux = l->inicio; aux != NULL; aux = aux->prox){
+		if (aux->valor == valor){
+			free (novo);
+			return;
 		}
+	}
+	if (l->qtd){
+		for (aux = l->inicio; aux->prox != NULL; aux = aux->prox);	
 		aux->prox = novo;
 	}
-	else	l->inicio = novo;
+	else
+		l->inicio = novo;
 	l->qtd++;
 }
 
@@ -29,25 +31,19 @@ void l_insere_ord(lista_t *l, int valor, int sent){
 	elem_t *aux, *novo = malloc(sizeof(elem_t));
 	if (l->qtd) {
 		if (sent)	// Decrescente -> descendo
-			for (aux = l->inicio; aux != NULL && aux->valor > valor; aux = aux->prox){
-				if (aux->valor == valor){
-					free (novo);
-					return;
-				}
-			}
+			for (aux = l->inicio; aux != NULL && aux->valor > valor; aux = aux->prox);
 		else 		// Crescente -> subindo
-			for (aux = l->inicio; aux != NULL && aux->valor < valor; aux = aux->prox){
-				if (aux->valor == valor){
-					free (novo);
-					return;
-				}
-			}
+			for (aux = l->inicio; aux != NULL && aux->valor < valor; aux = aux->prox);
 		if (aux==NULL){
 			l_insere(l, valor);
 			free(novo);
 			return;
 		}
 		else{
+			if (aux->valor == valor){
+				free (novo);
+				return;
+			}
 			novo->valor = aux->valor;
 			novo->prox 	= aux->prox;
 			aux->valor 	= valor;

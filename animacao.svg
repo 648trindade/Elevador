@@ -20,12 +20,12 @@
   <circle id='b1d' cx='12' cy='22' r='.45' fill='gray' stroke='transparent' />
   <circle id='b0s' cx='12' cy='27' r='.45' fill='gray' stroke='transparent' />
   <circle id='b0d' cx='12' cy='28' r='.45' fill='gray' stroke='transparent' />
-<g id='t2'> <circle id='t2c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>2</text> </g>
-<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='0 0' to='39.0 29.5' dur='0.3s' begin='0.0s' fill='freeze'/>
-<animate xlink:href='#t2c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='0.3s' fill='freeze'/>
-<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='39.0 29.5' to='17.0 29.5' dur='1.0s' begin='0.6s' fill='freeze'/>
+<g id='t1'> <circle id='t1c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>1</text> </g>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='0 0' to='37.0 29.5' dur='0.3s' begin='0.0s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='0.3s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='37.0 29.5' to='15.0 29.5' dur='1.0s' begin='0.6s' fill='freeze'/>
 <set xlink:href='#b0s' attributeName='fill' to='yellow' begin='1.6s' dur='1s'/>
-<set xlink:href='#t2c' attributeName='fill' to='yellow' begin='1.7s' dur='1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='1.7s' dur='1s'/>
 <set xlink:href='#b0s' attributeName='fill' to='yellow' begin='1.8s' dur='1s'/>
 <set xlink:href='#b0s' attributeName='fill' to='red' begin='1.9s'/>
 <g id='t3'> <circle id='t3c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>3</text> </g>
@@ -44,20 +44,115 @@
 <set xlink:href='#t4c' attributeName='fill' to='yellow' begin='5.7s' dur='1s'/>
 <set xlink:href='#b0s' attributeName='fill' to='yellow' begin='5.8s' dur='1s'/>
 <set xlink:href='#b0s' attributeName='fill' to='red' begin='5.9s'/>
-<g id='t1'> <circle id='t1c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>1</text> </g>
-<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='0 0' to='37.0 29.5' dur='0.3s' begin='6.0s' fill='freeze'/>
-<animate xlink:href='#t1c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='6.3s' fill='freeze'/>
-<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='37.0 29.5' to='15.0 29.5' dur='1.0s' begin='6.6s' fill='freeze'/>
-<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='7.6s' dur='1s'/>
-<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='7.7s' dur='1s'/>
-<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='7.8s' dur='1s'/>
-<set xlink:href='#b0s' attributeName='fill' to='red' begin='7.9s'/>
 <g id='t5'> <circle id='t5c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>5</text> </g>
-<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='0 0' to='45.0 29.5' dur='0.3s' begin='8.0s' fill='freeze'/>
-<animate xlink:href='#t5c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='8.3s' fill='freeze'/>
-<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='45.0 29.5' to='23.0 29.5' dur='1.0s' begin='8.6s' fill='freeze'/>
-<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='9.6s' dur='1s'/>
-<set xlink:href='#t5c' attributeName='fill' to='yellow' begin='9.7s' dur='1s'/>
-<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='9.8s' dur='1s'/>
-<set xlink:href='#b0s' attributeName='fill' to='red' begin='9.9s'/>
+<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='0 0' to='45.0 29.5' dur='0.3s' begin='6.0s' fill='freeze'/>
+<animate xlink:href='#t5c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='6.3s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='6.6s' fill='freeze'/>
+<g id='t2'> <circle id='t2c' cx='0' cy='0' r='1' fill='gray' stroke='transparent' /> <text x='0' y='.3' font-family='arial' text-anchor='middle' font-size='1' stroke-width='.02' fill='yellow' stroke='yellow'>2</text> </g>
+<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='0 0' to='39.0 29.5' dur='0.3s' begin='6.9s' fill='freeze'/>
+<animate xlink:href='#t2c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='7.2s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='15.0 29.5' to='3.5 29.5' dur='1.0s' begin='7.5s' fill='freeze'/>
+<set xlink:href='#b1' attributeName='fill' to='yellow' begin='8.5s' dur='.1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='8.6s' dur='.1s'/>
+<set xlink:href='#b1' attributeName='fill' to='yellow' begin='8.7s' dur='.1s'/>
+<set xlink:href='#b1' attributeName='fill' to='red' begin='8.8s' fill='freeze'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='19.0 29.5' to='6.0 29.5' dur='1.0s' begin='8.9s' fill='freeze'/>
+<set xlink:href='#b3' attributeName='fill' to='yellow' begin='9.9s' dur='.1s'/>
+<set xlink:href='#t3c' attributeName='fill' to='yellow' begin='10.0s' dur='.1s'/>
+<set xlink:href='#b3' attributeName='fill' to='yellow' begin='10.1s' dur='.1s'/>
+<set xlink:href='#b3' attributeName='fill' to='red' begin='10.2s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='21.0 29.5' to='8.5 29.5' dur='1.0s' begin='10.3s' fill='freeze'/>
+<set xlink:href='#b1' attributeName='fill' to='yellow' begin='11.3s' dur='.1s'/>
+<set xlink:href='#t4c' attributeName='fill' to='yellow' begin='11.4s' dur='.1s'/>
+<set xlink:href='#b1' attributeName='fill' to='yellow' begin='11.5s' dur='.1s'/>
+<set xlink:href='#b1' attributeName='fill' to='red' begin='11.6s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='gray' begin='11.7s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='11.8s' fill='freeze'/>
+<animateTransform xlink:href='#elevador' attributeName='transform' type='translate' from='0 0' to='0 -6' dur='0.6s' begin='12.1s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='3.5 29.5' to='3.5 23.5' dur='0.6s' begin='12.1s' fill='freeze'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='6.0 29.5' to='6.0 23.5' dur='0.6s' begin='12.1s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='8.5 29.5' to='8.5 23.5' dur='0.6s' begin='12.1s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='12.7s' fill='freeze'/>
+<animateTransform xlink:href='#t5' attributeName='transform' type='translate' from='45.0 29.5' to='23.0 29.5' dur='1.0s' begin='13.0s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='14.0s' dur='1s'/>
+<set xlink:href='#t5c' attributeName='fill' to='yellow' begin='14.1s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='14.2s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='14.3s'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='3.5 23.5' to='37.0 23.5' dur='1.0s' begin='14.4s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='green' to='gray' dur='0.3s' begin='15.4s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='8.5 23.5' to='43.0 23.5' dur='1.0s' begin='15.7s' fill='freeze'/>
+<animate xlink:href='#t4c' attributeName='fill' from='green' to='gray' dur='0.3s' begin='16.7s' fill='freeze'/>
+<set xlink:href='#b1' attributeName='fill' to='gray' begin='17.0s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='17.1s' fill='freeze'/>
+<animateTransform xlink:href='#t2' attributeName='transform' type='translate' from='39.0 29.5' to='17.0 29.5' dur='1.0s' begin='17.4s' fill='freeze'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='18.4s' dur='1s'/>
+<set xlink:href='#t2c' attributeName='fill' to='yellow' begin='18.5s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='yellow' begin='18.6s' dur='1s'/>
+<set xlink:href='#b0s' attributeName='fill' to='red' begin='18.7s'/>
+<animateTransform xlink:href='#elevador' attributeName='transform' type='translate' from='0 -6' to='0 -18' dur='1.2s' begin='18.8s' fill='freeze'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='6.0 23.5' to='6.0 11.5' dur='1.2s' begin='18.8s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='20.0s' fill='freeze'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='6.0 11.5' to='41.0 11.5' dur='1.0s' begin='20.3s' fill='freeze'/>
+<animate xlink:href='#t3c' attributeName='fill' from='green' to='gray' dur='0.3s' begin='21.3s' fill='freeze'/>
+<set xlink:href='#b3' attributeName='fill' to='gray' begin='21.6s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='21.7s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='37.0 23.5' to='15.0 23.5' dur='1.0s' begin='22.0s' fill='freeze'/>
+<set xlink:href='#b1s' attributeName='fill' to='yellow' begin='23.0s' dur='1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='23.1s' dur='1s'/>
+<set xlink:href='#b1s' attributeName='fill' to='yellow' begin='23.2s' dur='1s'/>
+<set xlink:href='#b1s' attributeName='fill' to='red' begin='23.3s'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='23.4s' fill='freeze'/>
+<animate xlink:href='#t4c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='23.7s' fill='freeze'/>
+<animate xlink:href='#t3c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='24.0s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='43.0 23.5' to='21.0 23.5' dur='1.0s' begin='24.3s' fill='freeze'/>
+<set xlink:href='#b1s' attributeName='fill' to='yellow' begin='25.3s' dur='1s'/>
+<set xlink:href='#t4c' attributeName='fill' to='yellow' begin='25.4s' dur='1s'/>
+<set xlink:href='#b1s' attributeName='fill' to='yellow' begin='25.5s' dur='1s'/>
+<set xlink:href='#b1s' attributeName='fill' to='red' begin='25.6s'/>
+<animateTransform xlink:href='#t3' attributeName='transform' type='translate' from='41.0 11.5' to='19.0 11.5' dur='1.0s' begin='25.7s' fill='freeze'/>
+<set xlink:href='#b3s' attributeName='fill' to='yellow' begin='26.7s' dur='1s'/>
+<set xlink:href='#t3c' attributeName='fill' to='yellow' begin='26.8s' dur='1s'/>
+<set xlink:href='#b3s' attributeName='fill' to='yellow' begin='26.9s' dur='1s'/>
+<set xlink:href='#b3s' attributeName='fill' to='red' begin='27.0s'/>
+<animateTransform xlink:href='#elevador' attributeName='transform' type='translate' from='0 -18' to='0 -6' dur='1.2s' begin='27.1s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='28.3s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='15.0 23.5' to='3.5 23.5' dur='1.0s' begin='28.6s' fill='freeze'/>
+<set xlink:href='#b4' attributeName='fill' to='yellow' begin='29.6s' dur='.1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='29.7s' dur='.1s'/>
+<set xlink:href='#b4' attributeName='fill' to='yellow' begin='29.8s' dur='.1s'/>
+<set xlink:href='#b4' attributeName='fill' to='red' begin='29.9s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='21.0 23.5' to='6.0 23.5' dur='1.0s' begin='30.0s' fill='freeze'/>
+<set xlink:href='#b2' attributeName='fill' to='yellow' begin='31.0s' dur='.1s'/>
+<set xlink:href='#t4c' attributeName='fill' to='yellow' begin='31.1s' dur='.1s'/>
+<set xlink:href='#b2' attributeName='fill' to='yellow' begin='31.2s' dur='.1s'/>
+<set xlink:href='#b2' attributeName='fill' to='red' begin='31.3s' fill='freeze'/>
+<set xlink:href='#b1s' attributeName='fill' to='gray' begin='31.4s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='31.5s' fill='freeze'/>
+<animateTransform xlink:href='#elevador' attributeName='transform' type='translate' from='0 -6' to='0 -12' dur='0.6s' begin='31.8s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='3.5 23.5' to='3.5 17.5' dur='0.6s' begin='31.8s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='6.0 23.5' to='6.0 17.5' dur='0.6s' begin='31.8s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='32.4s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='6.0 17.5' to='43.0 17.5' dur='1.0s' begin='32.7s' fill='freeze'/>
+<animate xlink:href='#t4c' attributeName='fill' from='green' to='gray' dur='0.3s' begin='33.7s' fill='freeze'/>
+<set xlink:href='#b2' attributeName='fill' to='gray' begin='34.0s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='34.1s' fill='freeze'/>
+<animateTransform xlink:href='#elevador' attributeName='transform' type='translate' from='0 -12' to='0 -24' dur='1.2s' begin='34.4s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='3.5 17.5' to='3.5 5.5' dur='1.2s' begin='34.4s' fill='freeze'/>
+<animate xlink:href='#porta' attributeName='height' from='0' to='1' dur='0.3s' begin='35.6s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='3.5 5.5' to='37.0 5.5' dur='1.0s' begin='35.9s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='green' to='gray' dur='0.3s' begin='36.9s' fill='freeze'/>
+<set xlink:href='#b4' attributeName='fill' to='gray' begin='37.2s' fill='freeze'/>
+<animate xlink:href='#t4c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='37.3s' fill='freeze'/>
+<animateTransform xlink:href='#t4' attributeName='transform' type='translate' from='43.0 17.5' to='21.0 17.5' dur='1.0s' begin='37.6s' fill='freeze'/>
+<set xlink:href='#b2s' attributeName='fill' to='yellow' begin='38.6s' dur='1s'/>
+<set xlink:href='#t4c' attributeName='fill' to='yellow' begin='38.7s' dur='1s'/>
+<set xlink:href='#b2s' attributeName='fill' to='yellow' begin='38.8s' dur='1s'/>
+<set xlink:href='#b2s' attributeName='fill' to='red' begin='38.9s'/>
+<animate xlink:href='#porta' attributeName='height' from='1' to='0' dur='0.3s' begin='39.0s' fill='freeze'/>
+<animate xlink:href='#t1c' attributeName='fill' from='gray' to='green' dur='0.3s' begin='39.3s' fill='freeze'/>
+<animateTransform xlink:href='#t1' attributeName='transform' type='translate' from='37.0 5.5' to='15.0 5.5' dur='1.0s' begin='39.6s' fill='freeze'/>
+<set xlink:href='#b4d' attributeName='fill' to='yellow' begin='40.6s' dur='.1s'/>
+<set xlink:href='#t1c' attributeName='fill' to='yellow' begin='40.7s' dur='.1s'/>
+<set xlink:href='#b4d' attributeName='fill' to='yellow' begin='40.8s' dur='.1s'/>
+<set xlink:href='#b4d' attributeName='fill' to='red' begin='40.9s' fill='freeze'/>
 </svg>

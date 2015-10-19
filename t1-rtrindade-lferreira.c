@@ -3,7 +3,8 @@
 #include <pthread.h>
 #include "lista.h"
 #include <time.h>
-
+#include <sched.h>
+#define _GNU_SOURCE
 
 pthread_mutex_t mutex_pedidos, mutex_print;
 
@@ -60,99 +61,133 @@ typedef struct{
 	lista_t pedidos[2];	// Listas contendo pedidos (0 subir, 1 descer)
 	int pessoas[3];		// vetor com número das pessoas dentro
 	int status;			// Estado do elevador;
+	int porta;
+	pthread_mutex_t m_bt;
+	pthread_mutex_t m_esp;
+	pthread_cond_t c_bt;
+	pthread_cond_t c_esp;
 }elevador;
 
 elevador e;
 pessoa *p;
 
-void chama_elevador(pessoa *p){
+void debug(char s[]){
+	pthread_mutex_lock(&mutex_print);
+	printf("%s\n",s);
+	pthread_mutex_unlock(&mutex_print);
+}
+
+void chama_elevador(int x){
 	pthread_mutex_lock(&mutex_pedidos);
 	int sentido;
-	if (p->pedido > p->andar){
+	if (p[x].pedido > p[x].andar){
 		sentido = 0; 	//pessoa vai subir
-		print(p->id, 'S', p->andar);
+		print(p[x].id, 'S', p[x].andar);
 	}
 	else{
 		sentido = 1; 	//pessoa vai descer
-		print(p->id, 'D', p->andar);
+		print(p[x].id, 'D', p[x].andar);
 	}
-	l_insere_ord(&(e.pedidos[sentido]), p->pedido, sentido);
+	l_insere_ord(&(e.pedidos[sentido]), p[x].andar, sentido);
 	pthread_mutex_unlock(&mutex_pedidos);
-	p->status = 2;
+	pthread_cond_signal(&(e.c_bt));
 }
 
 void *acao_pessoa(void *arg){
-	pessoa *p = (pessoa *) arg;
-	print(p->id, 'E', 0);
+	//pessoa *p = (pessoa *) arg;
+	char s[30];
+	int x = (int)arg;
+	print(p[x].id, 'E', 0);
 	struct timespec wait, rest;
 	wait.tv_sec = 0;
 	while (1) {
 		// consulta proximo destino
-		p->pedido = l_retira(&(p->dest));
+		p[x].pedido = l_retira(&(p[x].dest));
 		// chama o elevador
-		chama_elevador(p);
+		chama_elevador(x);
 		//espera ser acordado pelo elevador (elevador chegar no andar)
-		pthread_mutex_lock(&(p->m));
-		pthread_cond_wait(&(p->c),&(p->m));
-		pthread_mutex_unlock(&(p->m));
+		pthread_mutex_lock(&(p[x].m));
+		p[x].status = 2;
+		pthread_cond_wait(&(p[x].c),&(p[x].m));
+		pthread_mutex_unlock(&(p[x].m));
 		//entra elevador
-		//TODO
-		print(p->id, 'N', p->andar);
-		//p->status = 1;
-		p->andar = p->pedido;
-		print(p->id, 'I', p->andar);
+		print(p[x].id, 'N', p[x].andar);
+		p[x].status = 1;
+		p[x].andar = p[x].pedido;
+		print(p[x].id, 'I', p[x].andar);
+		////debug("sinalizei");
+		pthread_cond_signal(&(e.c_esp));
 		//espera ser acordado pelo elevador (elevador chegar no destino)
-		pthread_mutex_lock(&(p->m));
-		pthread_cond_wait(&(p->c),&(p->m));
-		pthread_mutex_unlock(&(p->m));
+		pthread_mutex_lock(&(p[x].m));
+		pthread_cond_wait(&(p[x].c),&(p[x].m));
+		pthread_mutex_unlock(&(p[x].m));
 		//entra no andar e visita (espera)
-		print(p->id, 'V', p->andar);
-		p->status = 0;
-		wait.tv_nsec = (long) l_retira(&(p->time));
+		print(p[x].id, 'V', p[x].andar);
+		pthread_cond_signal(&(e.c_esp));
+		p[x].status = 0;
+		wait.tv_nsec = (long) l_retira(&(p[x].time));
 		if (wait.tv_nsec != -1){
-			print(p->id, 'B', 0);
+			print(p[x].id, 'B', 0);
 			nanosleep(&wait, &rest);
-			print(p->id, 'E', 0);
+			print(p[x].id, 'E', 0);
 		}
 		else break;
 	}
-	print(p->id, 'M', 0);
-	p->status = -1;
+	print(p[x].id, 'M', 0);
+	p[x].status = -1;
+	pthread_cond_signal(&(e.c_bt));
 	pthread_exit(NULL);
 }
 
 void define_direcoes(int direcao){
-	int i,j, status;
+	debug(direcao?"procuro gente pra descer":"procuro gente pra subir");
+	int i, j, stat, luz=0;
 	lista_t aux;
 	l_cria(&aux);
-	if (direcao)	status = 2;
-	else			status = 1;
-	e.status = status;
+	if (direcao)	e.status = 2;
+	else			e.status = 1;
+	char s[30];
 	while(e.pedidos[direcao].qtd){
 		j = l_retira(&(e.pedidos[direcao]));
 		if (j == e.andar){
-			for(i=0; i<n || e.qtd_p<3; i++)
-				if (p[i].status == 2 && p[i].andar == e.andar && direcao?((p->pedido-p->andar)>0):((p->pedido-p->andar)<0)){
-					pthread_cond_signal(&(p[i].c));
+			for(i=0; i<n && e.qtd_p<3; i++)
+				if ((p[i].status == 2) && (p[i].andar == e.andar) && (direcao?((p[i].pedido-p[i].andar)<0):((p[i].pedido-p[i].andar)>0))){
 					e.qtd_p++;
-					p[i].status = 1;
 					e.pessoas[e.qtd_p-1] = i;
-					//TODO verificar se ainda resta pessoas esperando pra subir nesse andar
-					//se nao tiver, apagar o botao externo
+					l_insere_ord(&(e.dest),p[i].pedido,direcao);
+					if (!(e.porta)){
+						e.porta = 1;
+						print(-1,'A',e.andar);
+					}
+					luz=1;
+					pthread_cond_signal(&(p[i].c));
+					//debug("esperando a pessoa sinalizar");
+					pthread_mutex_lock(&(e.m_esp));
+					pthread_cond_wait(&(e.c_esp),&(e.m_esp));
+					pthread_mutex_unlock(&(e.m_esp));
+					//debug("sinalizou");
 				}
 		}
-		else if (direcao?(j > e.andar):(j < e.andar))
+		else if (direcao?(j < e.andar):(j > e.andar)){
+			////debug("alguem chamou na mesma direcao");
 			l_insere_ord(&(e.dest), j, direcao);
-		else
+		}
+		else{
+			////debug("alguem chamou direcao oposta, ignorei");
 			l_insere(&aux, j);
+		}
 	}
 	while (aux.qtd)
-		l_insere_ord(&(e.pedidos[0]), l_retira(&aux), direcao);
-	l_destroi(&aux);
+		l_insere_ord(&(e.pedidos[direcao]), l_retira(&aux), direcao);
+	//l_destroi(&aux);
+	sprintf(s,"%d qtd",e.dest.qtd);
+	////debug(s);
 	for(i=0; i<n; i++)
-		if (p[i].status == 2 && p[i].andar == e.andar)
+		if ((p[i].status == 2) && (p[i].andar == e.andar) && (direcao?((p[i].pedido-p[i].andar)<0):((p[i].pedido-p[i].andar)>0)))
+			////debug("vou ir sem desligar luz");
 			return;
-	print(0,direcao?'d':'s',e.andar);
+	if (luz)
+		print(-1,direcao?'d':'s',e.andar);
 }
 
 void shifta_vetor(int pos){
@@ -167,43 +202,114 @@ void shifta_vetor(int pos){
 
 void *acao_elevador(void* args){
 	// Espera enquanto nao houver destinos nem pedidos
-	int i,j,fim;
+	int i,desceu, quantia;
+	char s[30];
 	while(1){
-		print(0,'A',e.andar);
+		//coco
 		if (e.qtd_p){
+			desceu = 0;
 			for(i=0;i<e.qtd_p;i++){
 				if (p[e.pessoas[i]].pedido == e.andar){
+					if (!(e.porta)){
+						e.porta = 1;
+						print(-1,'A',e.andar);
+					}
 					pthread_cond_signal(&(p[e.pessoas[i]].c));
 					shifta_vetor(i);
+					desceu = 1;
+					pthread_mutex_lock(&(e.m_esp));
+					pthread_cond_wait(&(e.c_esp),&(e.m_esp));
+					pthread_mutex_unlock(&(e.m_esp));
 				}
-				print(0,'i',e.andar);
 			}
-		}
-		if (e.dest.qtd == 0){
-			pthread_mutex_lock(&mutex_pedidos);
-			while (e.pedidos[0].qtd == 0 || e.pedidos[1].qtd==0){
-				pthread_mutex_unlock(&mutex_pedidos);
-				// testa se todas ja morreram
-				for(i=0;i<n;i++)
-					if(p[i].status >=0 )
-						break;
-				if (i==n){
-					print(0,'F',e.andar);
-					pthread_exit(0);
-				}
-				pthread_yield();
-				pthread_mutex_lock(&mutex_pedidos);
-			}
-			pthread_mutex_unlock(&mutex_pedidos);
+			if (desceu)
+				print(-1,'i',e.andar);
 		}
 		pthread_mutex_lock(&mutex_pedidos);
-		if (e.status !=2 && e.pedidos[0].qtd)
-			define_direcoes(0);
-		else if (e.status !=1 && e.pedidos[1].qtd)
-			define_direcoes(1);
+		while (!(e.pedidos[0].qtd) && !(e.pedidos[1].qtd) && !(e.qtd_p)){
+			//debug("entrei no laco pq nao tem pedidos");
+			pthread_mutex_unlock(&mutex_pedidos);
+			for(i=0;i<n;i++)
+				if(p[i].status >=0 )
+					break;
+			if (i==n){
+				print(-1,'F',e.andar);
+				pthread_exit(0);
+			}
+			for(i=0;i<n;i++)
+				if((p[i].status ==2) && (p[i].andar == e.andar))
+					break;
+			if (i!=n){
+				pthread_mutex_lock(&mutex_pedidos);
+				break;
+			}
+			pthread_mutex_lock(&(e.m_bt));
+			pthread_cond_wait(&(e.c_bt),&(e.m_bt));
+			pthread_mutex_unlock(&(e.m_bt));
+			pthread_mutex_lock(&mutex_pedidos);
+		}
 		pthread_mutex_unlock(&mutex_pedidos);
-		print(0,'F',e.andar);
-		e.andar = l_retira(&(e.dest));
+		pthread_mutex_lock(&mutex_pedidos);
+		// teste
+		quantia = e.pedidos[0].qtd;
+		for (i=0; i<quantia; i++){
+			desceu = l_retira(&(e.pedidos[0]));
+			sprintf(s,"== subir %d",desceu);
+			//debug(s);
+			l_insere(&(e.pedidos[0]),desceu);
+		}
+		quantia = e.pedidos[1].qtd;
+		for (i=0; i<quantia; i++){
+			desceu = l_retira(&(e.pedidos[1]));
+			sprintf(s,"== descer %d",desceu);
+			//debug(s);
+			l_insere(&(e.pedidos[1]),desceu);
+		}
+		if (e.pedidos[0].qtd && !((e.status == 2) && e.dest.qtd))
+			define_direcoes(0);
+		if (e.dest.qtd == 0)
+			e.status = 0;
+		if (e.pedidos[1].qtd && !((e.status == 1) && e.dest.qtd))
+			define_direcoes(1);
+		if (e.dest.qtd == 0)
+			e.status = 0;
+		sprintf(s,"status antes %d",e.status);
+		//debug(s);
+		// correcao
+		if (!e.status){
+			if (e.pedidos[0].qtd){
+				quantia = e.pedidos[0].qtd;
+				for (i=0; i < quantia-1; i++)
+					l_insere(&(e.pedidos[0]), l_retira(&(e.pedidos[0])));
+				quantia = l_retira(&(e.pedidos[0]));
+				l_insere(&(e.dest), quantia);
+				e.status = 1;
+			}
+			else if (e.pedidos[1].qtd){
+				quantia = e.pedidos[1].qtd;
+				for (i=0; i < quantia-1; i++)
+					l_insere(&(e.pedidos[1]), l_retira(&(e.pedidos[1])));
+				quantia = l_retira(&(e.pedidos[1]));
+				l_insere(&(e.dest), quantia);
+				e.status = 2;
+			}
+		}
+		pthread_mutex_unlock(&mutex_pedidos);
+		sprintf(s,"status depois %d",e.status);
+		//debug(s);
+		if (e.dest.qtd){
+			sprintf(s,"porta %d",e.porta);
+			//debug(s);
+			if (e.porta){
+				e.porta = 0;
+				print(-1,'F',e.andar);
+			}
+			sprintf(s,"andar antes %d",e.andar);
+			//debug(s);
+			e.andar = l_retira(&(e.dest));
+			sprintf(s,"andar depois %d",e.andar);
+			//debug(s);
+		}
 	}
 }
 
@@ -225,7 +331,7 @@ void cria_threads(pessoa p[], pthread_t p_thr[], int n){
 		}
 		l_insere(&(p[i].dest), 0);
 		l_insere(&(p[i].time),-1);
-		pthread_create(&p_thr[i], NULL, acao_pessoa, (void*)&p[i]);
+		pthread_create(&p_thr[i], NULL, acao_pessoa, i);
 	}
 }
 
@@ -242,15 +348,26 @@ int main(){
 	// Descreve elevador
 	e.qtd_p = 0;
 	e.andar = 0;
+	e.porta = 0;
 	l_cria(&(e.dest));
 	l_cria(&(e.pedidos[0]));
 	l_cria(&(e.pedidos[1]));
 	e.status = 0;	// Parado
+	pthread_cond_init(&(e.c_bt),0);
+	pthread_mutex_init(&(e.m_bt),0);
+	pthread_cond_init(&(e.c_esp),0);
+	pthread_mutex_init(&(e.m_esp),0);
 	pthread_create(&e_thr,NULL,acao_elevador,NULL);
 	cria_threads(p, p_thr, n);
 	
-	for (i=0;i < n; i++){
+	for (i=0;i < n; i++)
 		pthread_join(p_thr[i],0);
+	pthread_join(e_thr,0);
+	pthread_cond_destroy(&(e.c_bt));
+	pthread_mutex_destroy(&(e.m_bt));
+	pthread_cond_destroy(&(e.c_esp));
+	pthread_mutex_destroy(&(e.m_esp));
+	for (i=0;i < n; i++) {
 		pthread_cond_destroy(&(p[i].c));
 		pthread_mutex_destroy(&(p[i].m));
 	}
